@@ -5,6 +5,16 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     @task = tasks(:one)
   end
 
+  test "should update one" do
+    task2 = Marshall.load(Marshall.dump(@task))
+    task2.due_on(DateTime.now)
+    task2.id = nil
+    task2 = task2.save!
+    head tasks_url
+    assert_response :success
+    assert response.header['x-count'] == 2
+  end
+
   test "should get index" do
     get tasks_url
     assert_response :success
