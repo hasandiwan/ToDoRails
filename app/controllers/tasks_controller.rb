@@ -1,6 +1,19 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
   before_action :set_project, only: %i[ new create ]
+  before_action :require_login, except: :update_for_today
+  
+
+  def update_for_today
+      changed = 0
+      Task.where(:due_date => Date.today).where(:completed  => false).each {|t| 
+        t.due_date = Date.today.next_weekday
+          t.save
+          changed = changed + 1
+      }
+      render :plain => "#{changed} incomplete records have their due dates updated"
+  end
+
 
   # GET /tasks or /tasks.json
   def index

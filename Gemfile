@@ -62,6 +62,7 @@ gem "google-cloud-storage"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -82,3 +83,11 @@ group :test do
 end
 
 gem "rspec-rails", "~> 7.1"
+
+gem "good_job", "~> 4.8"
+
+gem "http", "~> 5.2"
+
+gem "rubocop-rails", "~> 2.29"
+
+gem "rubocop-factory_bot", "~> 2.26"

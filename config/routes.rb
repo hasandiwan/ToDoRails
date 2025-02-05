@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "projects#index"
 
+  get "clean" => "tasks#update_for_today"
   get "login" => "sessions#new", as: :login
   post "login" => "sessions#create"
   delete "logout" => "sessions#destroy", as: :logout
