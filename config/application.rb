@@ -15,6 +15,16 @@ module Hobo
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w(assets tasks))
+    # config/application.rb or config/environments/{RAILS_ENV}.rb
+    config.active_job.queue_adapter = :good_job
+    config.good_job.enable_cron = true
+    config.good_job.cron = {
+      daily_task: {
+        cron: "0, 3, *, *, *",
+        class: "CleanupTodosJob",
+        description: 'Cleanup todos',
+      },
+    }
 
     # Configuration for the application, engines, and railties goes here.
     #
