@@ -11,7 +11,9 @@ class TasksController < ApplicationController
           t.save
           changed = changed + 1
       }
-      render :plain => "#{changed} incomplete records have their due dates updated"
+      body = "#{changed} incomplete records have their due dates updated"
+      render :plain => body
+      HTTP.post("https://units.d8u.us/status", :json => {:services => "telegram",  :status => body})
   end
 
 
